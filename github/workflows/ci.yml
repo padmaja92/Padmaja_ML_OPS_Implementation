@@ -1,12 +1,11 @@
 name: CI Pipeline to build and test Docker image for Model
-on : 
+on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
-jobs:
 
+jobs:
   matrix-test-pip:
     name: Train and save model for multiple python versions
     runs-on: ubuntu-latest
@@ -27,13 +26,16 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
 
+      - name: Create artifacts directory
+        run: mkdir -p artifacts
+
       - name: Train and save model
         run: |
-          python train.py --output model-${{ matrix.python-version }}.pkl
+          python train.py --output artifacts/model-${{ matrix.python-version }}.pkl
           ls -la artifacts/
 
-      - name : Output to upload artifacts
-      - uses: actions/upload-artifact@v2
+      - name: Upload model artifact
+        uses: actions/upload-artifact@v2
         with:
           name: model-${{ matrix.python-version }}
           path: artifacts/model-${{ matrix.python-version }}.pkl
