@@ -35,7 +35,7 @@ jobs:
           ls -la artifacts/
 
       - name: Upload model artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: model-${{ matrix.python-version }}
           path: artifacts/model-${{ matrix.python-version }}.pkl
