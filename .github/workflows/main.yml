@@ -37,5 +37,5 @@ jobs:
       - name: Upload model artifact
         uses: actions/upload-artifact@v4
         with:
-          name: model-${{ matrix.python-version }}
-          path: artifacts/model-${{ matrix.python-version }}.pkl
+          name: ml-artifacts-${{ matrix.python-version }}-${{ github.run_id }}
+          path: artifacts
