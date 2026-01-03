@@ -27,15 +27,15 @@ jobs:
           pip install -r requirements.txt
 
       - name: Create artifacts directory
-        run: mkdir -p artifacts
+        run: mkdir -p artifacts/model-version-${{ matrix.python-version }}
 
       - name: Train and save model
         run: |
-          python train.py
+          python train.py --output artifacts/model-version-${{ matrix.python-version }}/model.pkl
           ls -la artifacts/
 
-      - name: Upload model artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: ml-artifacts-${{ matrix.python-version }}-${{ github.run_id }}
-          path: artifacts
+          name: model.pkl
+          path: artifacts/model-version-${{ matrix.python-version }}/model.pkl
