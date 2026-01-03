@@ -38,5 +38,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: model.pkl
+          name: model-version-${{ matrix.python-version }}.pkl
           path: artifacts/model-version-${{ matrix.python-version }}/model.pkl
