@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Create artifacts directory
-        run: mkdir -p artifacts
+        run: mkdir -p artifacts/model-version-${{ matrix.python-version }}
 
       - name: Train and save model
         run: |
