@@ -31,12 +31,12 @@ jobs:
 
       - name: Train and save model
         run: |
-          python train.py
-          ls -la artifacts
-
+          python train.py          
+          cp artifacts/model.pkl artifacts/model-version-${{ matrix.python-version }}/model.pkl
+          ls -la artifacts/model-version-${{ matrix.python-version }}/model.pkl
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: model.pkl
-          path: artifacts
+          path: artifacts/model-version-${{ matrix.python-version }}/model.pkl
