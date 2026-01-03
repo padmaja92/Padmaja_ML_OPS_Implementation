@@ -32,10 +32,11 @@ jobs:
       - name: Train and save model
         run: |
           python train.py --output artifacts/model-version-${{ matrix.python-version }}/model.pkl
-          ls -la artifacts/
+          ls -la artifacts/model-version-${{ matrix.python-version }}/model.pkl
+
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: model.pkl
+          name: model-${{ matrix.python-version }}
           path: artifacts/model-version-${{ matrix.python-version }}/model.pkl
