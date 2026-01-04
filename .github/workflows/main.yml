@@ -40,3 +40,11 @@ jobs:
         with:
           name: model-version-${{ matrix.python-version }}.pkl
           path: artifacts/model-version-${{ matrix.python-version }}/model.pkl
+
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          context: .  
+          push: false
+          tags: user/mlops-model:python-${{ matrix.python-version }}
+          file: Padmaja_ML_OPS_Implementation/Dockerfile
